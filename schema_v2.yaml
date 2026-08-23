@@ -1,0 +1,609 @@
+openapi: 3.0.3
+info:
+  title: API Escola
+  version: 2.0.0 (v2)
+  description: Documentação da API para armazenar dados de estudantes, cursos e matrículas
+  license:
+    name: GPLv3
+    url: https://www.gnu.org/licenses/gpl-3.0.html.en
+paths:
+  /v2/cursos/:
+    get:
+      operationId: v2_cursos_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v2
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCursoList'
+          description: ''
+    post:
+      operationId: v2_cursos_create
+      tags:
+      - v2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Curso'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Curso'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Curso'
+        required: true
+      security:
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Curso'
+          description: ''
+  /v2/cursos/{id}/:
+    get:
+      operationId: v2_cursos_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este curso.
+        required: true
+      tags:
+      - v2
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Curso'
+          description: ''
+    put:
+      operationId: v2_cursos_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este curso.
+        required: true
+      tags:
+      - v2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Curso'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Curso'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Curso'
+        required: true
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Curso'
+          description: ''
+    patch:
+      operationId: v2_cursos_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este curso.
+        required: true
+      tags:
+      - v2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCurso'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCurso'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCurso'
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Curso'
+          description: ''
+    delete:
+      operationId: v2_cursos_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este curso.
+        required: true
+      tags:
+      - v2
+      security:
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /v2/cursos/{id}/matriculas:
+    get:
+      operationId: v2_cursos_matriculas_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - v2
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MatriculasPorCurso'
+          description: ''
+  /v2/estudantes/:
+    get:
+      operationId: v2_estudantes_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: Qual campo usar ao ordenar os resultados.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: Um termo de busca.
+        schema:
+          type: string
+      tags:
+      - v2
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEstudanteSerializerV2List'
+          description: ''
+    post:
+      operationId: v2_estudantes_create
+      tags:
+      - v2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstudanteSerializerV2'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EstudanteSerializerV2'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EstudanteSerializerV2'
+        required: true
+      security:
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstudanteSerializerV2'
+          description: ''
+  /v2/estudantes/{id}/:
+    get:
+      operationId: v2_estudantes_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este estudante.
+        required: true
+      tags:
+      - v2
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstudanteSerializerV2'
+          description: ''
+    put:
+      operationId: v2_estudantes_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este estudante.
+        required: true
+      tags:
+      - v2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstudanteSerializerV2'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EstudanteSerializerV2'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EstudanteSerializerV2'
+        required: true
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstudanteSerializerV2'
+          description: ''
+    patch:
+      operationId: v2_estudantes_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este estudante.
+        required: true
+      tags:
+      - v2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEstudanteSerializerV2'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEstudanteSerializerV2'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEstudanteSerializerV2'
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EstudanteSerializerV2'
+          description: ''
+    delete:
+      operationId: v2_estudantes_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este estudante.
+        required: true
+      tags:
+      - v2
+      security:
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /v2/estudantes/{id}/matriculas:
+    get:
+      operationId: v2_estudantes_matriculas_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - v2
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MatriculasPorEstudante'
+          description: ''
+  /v2/matriculas/:
+    get:
+      operationId: v2_matriculas_list
+      tags:
+      - v2
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Matricula'
+          description: ''
+    post:
+      operationId: v2_matriculas_create
+      tags:
+      - v2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Matricula'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Matricula'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Matricula'
+        required: true
+      security:
+      - basicAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matricula'
+          description: ''
+  /v2/matriculas/{id}/:
+    get:
+      operationId: v2_matriculas_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este matricula.
+        required: true
+      tags:
+      - v2
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Matricula'
+          description: ''
+components:
+  schemas:
+    Curso:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        codigo:
+          type: string
+          title: Código
+          maxLength: 10
+          minLength: 3
+        descricao:
+          type: string
+          title: Descrição
+        nivel:
+          allOf:
+          - $ref: '#/components/schemas/NivelEnum'
+          title: Nível
+      required:
+      - codigo
+      - descricao
+      - id
+    EstudanteSerializerV2:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 50
+        numero_celular:
+          type: string
+          title: Número de celular
+          maxLength: 14
+      required:
+      - email
+      - id
+      - nome
+      - numero_celular
+    Matricula:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        periodo:
+          allOf:
+          - $ref: '#/components/schemas/PeriodoEnum'
+          title: Período
+        estudante:
+          type: integer
+        curso:
+          type: integer
+      required:
+      - curso
+      - estudante
+      - id
+    MatriculasPorCurso:
+      type: object
+      properties:
+        estudante_nome:
+          type: string
+          readOnly: true
+      required:
+      - estudante_nome
+    MatriculasPorEstudante:
+      type: object
+      properties:
+        curso:
+          type: string
+          title: Descrição
+          readOnly: true
+        periodo:
+          type: string
+          readOnly: true
+      required:
+      - curso
+      - periodo
+    NivelEnum:
+      enum:
+      - B
+      - I
+      - A
+      type: string
+      description: |-
+        * `B` - Básico
+        * `I` - Intermediário
+        * `A` - Avançado
+    PaginatedCursoList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Curso'
+    PaginatedEstudanteSerializerV2List:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EstudanteSerializerV2'
+    PatchedCurso:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        codigo:
+          type: string
+          title: Código
+          maxLength: 10
+          minLength: 3
+        descricao:
+          type: string
+          title: Descrição
+        nivel:
+          allOf:
+          - $ref: '#/components/schemas/NivelEnum'
+          title: Nível
+    PatchedEstudanteSerializerV2:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 50
+        numero_celular:
+          type: string
+          title: Número de celular
+          maxLength: 14
+    PeriodoEnum:
+      enum:
+      - M
+      - V
+      - N
+      type: string
+      description: |-
+        * `M` - MATUTINO
+        * `V` - VESPERTINO
+        * `N` - NOTURNO
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

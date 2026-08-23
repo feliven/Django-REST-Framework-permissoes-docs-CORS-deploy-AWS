@@ -36,12 +36,16 @@ router.register(r"matriculas", MatriculaViewSet)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", RedirectView.as_view(url="/v1/", permanent=False)),
-    path("schema/", SpectacularAPIView.as_view(), name="schema"),
+    # Schemas para v1 e v2
+    path("schema/v1/", SpectacularAPIView.as_view(api_version="v1"), name="schema-v1"),
+    path("schema/v2/", SpectacularAPIView.as_view(api_version="v2"), name="schema-v2"),
+    # Swagger UI único (com seletor)
     path(
         "swagger/",
-        SpectacularSwaggerView.as_view(url_name="schema"),
+        SpectacularSwaggerView.as_view(url_name="schema-v1"),
         name="swagger-ui",
     ),
+    # Rotas da API
     path("<str:version>/", include(router.urls)),
     path(
         "<str:version>/estudantes/<int:pk>/matriculas",

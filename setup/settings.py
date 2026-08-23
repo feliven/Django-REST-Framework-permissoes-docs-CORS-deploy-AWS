@@ -131,6 +131,20 @@ SPECTACULAR_SETTINGS = {
         "name": "GPLv3",
         "url": "https://www.gnu.org/licenses/gpl-3.0.html.en",
     },
+    # Configuração do dropdown no topo do Swagger UI:
+    "SWAGGER_UI_SETTINGS": """{
+        deepLinking: true,
+        persistAuthorization: true,
+        layout: "StandaloneLayout",
+        presets: [
+            SwaggerUIBundle.presets.apis,
+            SwaggerUIStandalonePreset
+        ],
+        urls: [
+            {url: "/schema/v1/", name: "Versão 1.0 (v1)"},
+            {url: "/schema/v2/", name: "Versão 2.0 (v2)"}
+        ]
+    }""",
 }
 
 
