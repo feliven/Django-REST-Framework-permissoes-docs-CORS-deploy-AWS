@@ -1,8 +1,16 @@
 asgiref
+attrs
 Django
 django-filter
 djangorestframework
-Faker
+drf-spectacular
+inflection
+jsonschema
+jsonschema-specifications
 Markdown
+PyYAML
+referencing
+rpds-py
 sqlparse
+uritemplate
 validate-docbr

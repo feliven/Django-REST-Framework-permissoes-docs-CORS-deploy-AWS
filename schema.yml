@@ -1,0 +1,620 @@
+openapi: 3.0.3
+info:
+  title: ""
+  version: 0.0.0
+paths:
+  /cursos/:
+    get:
+      operationId: cursos_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: Um número de página dentro do conjunto de resultados paginado.
+          schema:
+            type: integer
+      tags:
+        - cursos
+      security:
+        - basicAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedCursoList"
+          description: ""
+    post:
+      operationId: cursos_create
+      tags:
+        - cursos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Curso"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Curso"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Curso"
+        required: true
+      security:
+        - basicAuth: []
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curso"
+          description: ""
+  /cursos/{id}/:
+    get:
+      operationId: cursos_retrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Um valor inteiro único que identifica este curso.
+          required: true
+      tags:
+        - cursos
+      security:
+        - basicAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curso"
+          description: ""
+    put:
+      operationId: cursos_update
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Um valor inteiro único que identifica este curso.
+          required: true
+      tags:
+        - cursos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Curso"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Curso"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Curso"
+        required: true
+      security:
+        - basicAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curso"
+          description: ""
+    patch:
+      operationId: cursos_partial_update
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Um valor inteiro único que identifica este curso.
+          required: true
+      tags:
+        - cursos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedCurso"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/PatchedCurso"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/PatchedCurso"
+      security:
+        - basicAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Curso"
+          description: ""
+    delete:
+      operationId: cursos_destroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Um valor inteiro único que identifica este curso.
+          required: true
+      tags:
+        - cursos
+      security:
+        - basicAuth: []
+      responses:
+        "204":
+          description: No response body
+  /cursos/{id}/matriculas:
+    get:
+      operationId: cursos_matriculas_list
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - cursos
+      security:
+        - basicAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MatriculasPorCurso"
+          description: ""
+  /estudantes/:
+    get:
+      operationId: estudantes_list
+      parameters:
+        - name: ordering
+          required: false
+          in: query
+          description: Qual campo usar ao ordenar os resultados.
+          schema:
+            type: string
+        - name: page
+          required: false
+          in: query
+          description: Um número de página dentro do conjunto de resultados paginado.
+          schema:
+            type: integer
+        - name: search
+          required: false
+          in: query
+          description: Um termo de busca.
+          schema:
+            type: string
+      tags:
+        - estudantes
+      security:
+        - basicAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedEstudanteList"
+          description: ""
+    post:
+      operationId: estudantes_create
+      tags:
+        - estudantes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Estudante"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Estudante"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Estudante"
+        required: true
+      security:
+        - basicAuth: []
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estudante"
+          description: ""
+  /estudantes/{id}/:
+    get:
+      operationId: estudantes_retrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Um valor inteiro único que identifica este estudante.
+          required: true
+      tags:
+        - estudantes
+      security:
+        - basicAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estudante"
+          description: ""
+    put:
+      operationId: estudantes_update
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Um valor inteiro único que identifica este estudante.
+          required: true
+      tags:
+        - estudantes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Estudante"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Estudante"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Estudante"
+        required: true
+      security:
+        - basicAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estudante"
+          description: ""
+    patch:
+      operationId: estudantes_partial_update
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Um valor inteiro único que identifica este estudante.
+          required: true
+      tags:
+        - estudantes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PatchedEstudante"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/PatchedEstudante"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/PatchedEstudante"
+      security:
+        - basicAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Estudante"
+          description: ""
+    delete:
+      operationId: estudantes_destroy
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Um valor inteiro único que identifica este estudante.
+          required: true
+      tags:
+        - estudantes
+      security:
+        - basicAuth: []
+      responses:
+        "204":
+          description: No response body
+  /estudantes/{id}/matriculas:
+    get:
+      operationId: estudantes_matriculas_list
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - estudantes
+      security:
+        - basicAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MatriculasPorEstudante"
+          description: ""
+  /matriculas/:
+    get:
+      operationId: matriculas_list
+      tags:
+        - matriculas
+      security:
+        - basicAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Matricula"
+          description: ""
+    post:
+      operationId: matriculas_create
+      tags:
+        - matriculas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Matricula"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/Matricula"
+          multipart/form-data:
+            schema:
+              $ref: "#/components/schemas/Matricula"
+        required: true
+      security:
+        - basicAuth: []
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Matricula"
+          description: ""
+  /matriculas/{id}/:
+    get:
+      operationId: matriculas_retrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Um valor inteiro único que identifica este matricula.
+          required: true
+      tags:
+        - matriculas
+      security:
+        - basicAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Matricula"
+          description: ""
+components:
+  schemas:
+    Curso:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        codigo:
+          type: string
+          title: Código
+          maxLength: 10
+          minLength: 3
+        descricao:
+          type: string
+          title: Descrição
+        nivel:
+          allOf:
+            - $ref: "#/components/schemas/NivelEnum"
+          title: Nível
+      required:
+        - codigo
+        - descricao
+        - id
+    Estudante:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 50
+        cpf:
+          type: string
+          maxLength: 11
+        data_nascimento:
+          type: string
+          format: date
+          title: Data de nascimento
+        numero_celular:
+          type: string
+          title: Número de celular
+          maxLength: 14
+      required:
+        - data_nascimento
+        - email
+        - id
+        - nome
+        - numero_celular
+    Matricula:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        periodo:
+          allOf:
+            - $ref: "#/components/schemas/PeriodoEnum"
+          title: Período
+        estudante:
+          type: integer
+        curso:
+          type: integer
+      required:
+        - curso
+        - estudante
+        - id
+    MatriculasPorCurso:
+      type: object
+      properties:
+        estudante_nome:
+          type: string
+          readOnly: true
+      required:
+        - estudante_nome
+    MatriculasPorEstudante:
+      type: object
+      properties:
+        curso:
+          type: string
+          title: Descrição
+          readOnly: true
+        periodo:
+          type: string
+          readOnly: true
+      required:
+        - curso
+        - periodo
+    NivelEnum:
+      enum:
+        - B
+        - I
+        - A
+      type: string
+      description: |-
+        * `B` - Básico
+        * `I` - Intermediário
+        * `A` - Avançado
+    PaginatedCursoList:
+      type: object
+      required:
+        - count
+        - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/Curso"
+    PaginatedEstudanteList:
+      type: object
+      required:
+        - count
+        - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/Estudante"
+    PatchedCurso:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        codigo:
+          type: string
+          title: Código
+          maxLength: 10
+          minLength: 3
+        descricao:
+          type: string
+          title: Descrição
+        nivel:
+          allOf:
+            - $ref: "#/components/schemas/NivelEnum"
+          title: Nível
+    PatchedEstudante:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 50
+        cpf:
+          type: string
+          maxLength: 11
+        data_nascimento:
+          type: string
+          format: date
+          title: Data de nascimento
+        numero_celular:
+          type: string
+          title: Número de celular
+          maxLength: 14
+    PeriodoEnum:
+      enum:
+        - M
+        - V
+        - N
+      type: string
+      description: |-
+        * `M` - MATUTINO
+        * `V` - VESPERTINO
+        * `N` - NOTURNO
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
