@@ -12,6 +12,7 @@ from escola.serializers import (
     MatriculasPorEstudanteSerializer,
     MatriculasPorCursoSerializer,
 )
+from escola.throttles import EstudanteRateThrottle, CursoRateThrottle
 
 
 class ShortPagination(PageNumberPagination):
@@ -43,7 +44,7 @@ class EstudanteViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, CaseInsensitiveOrderingFilter, SearchFilter]
     ordering_fields = ["nome"]
     search_fields = ["nome", "cpf"]
-    throttle_scope = "estudantes"
+    throttle_classes = [EstudanteRateThrottle]
 
     def get_serializer_class(self):  # type: ignore[override]
         if getattr(self.request, "version", None) == "v2":
@@ -55,7 +56,7 @@ class CursoViewSet(viewsets.ModelViewSet):
     queryset = Curso.objects.all().order_by("id")
     serializer_class = CursoSerializer
     pagination_class = ShortPagination
-    throttle_scope = "cursos"
+    throttle_classes = [CursoRateThrottle]
 
 
 class MatriculaViewSet(viewsets.ModelViewSet):
