@@ -1,6 +1,7 @@
 asgiref
 attrs
 Django
+django-cors-headers
 django-filter
 djangorestframework
 drf-spectacular
