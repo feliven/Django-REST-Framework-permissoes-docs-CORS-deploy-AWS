@@ -1,5 +1,7 @@
 from django.db.models.functions import Lower
 from rest_framework import viewsets, generics
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.filters import OrderingFilter, SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
@@ -57,6 +59,7 @@ class CursoViewSet(viewsets.ModelViewSet):
     serializer_class = CursoSerializer
     pagination_class = ShortPagination
     throttle_classes = [CursoRateThrottle]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class MatriculaViewSet(viewsets.ModelViewSet):
