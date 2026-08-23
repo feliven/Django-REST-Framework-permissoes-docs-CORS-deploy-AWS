@@ -62,6 +62,7 @@ class CursoViewSet(viewsets.ModelViewSet):
 class MatriculaViewSet(viewsets.ModelViewSet):
     queryset = Matricula.objects.all().order_by("id")
     serializer_class = MatriculaSerializer
+    http_method_names = ["get", "post"]
 
 
 class MatriculasPorEstudante(generics.ListAPIView):
