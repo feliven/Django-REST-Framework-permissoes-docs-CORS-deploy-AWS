@@ -125,12 +125,15 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "API Escola",
     "DESCRIPTION": "Documentação da API para armazenar dados de estudantes, "
     "cursos e matrículas",
-    "VERSION": "2.0.0",
+    "SCHEMA_PATH_PREFIX": r"/api/v[0-9]",
     "SERVE_INCLUDE_SCHEMA": False,
     "LICENSE": {
         "name": "GPLv3",
         "url": "https://www.gnu.org/licenses/gpl-3.0.html.en",
     },
+    "POSTPROCESSING_HOOKS": [
+        "escola.hooks.custom_version_hook",
+    ],
     # Configuração do dropdown no topo do Swagger UI:
     "SWAGGER_UI_SETTINGS": """{
         deepLinking: true,
@@ -141,8 +144,8 @@ SPECTACULAR_SETTINGS = {
             SwaggerUIStandalonePreset
         ],
         urls: [
-            {url: "/schema/v1/", name: "Versão 1.0 (v1)"},
-            {url: "/schema/v2/", name: "Versão 2.0 (v2)"}
+            {url: "/schema/v1/", name: "V1"},
+            {url: "/schema/v2/", name: "V2"}
         ]
     }""",
 }

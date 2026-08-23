@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: API Escola
-  version: 2.0.0 (v2)
+  version: 2.0.0
   description: Documentação da API para armazenar dados de estudantes, cursos e matrículas
   license:
     name: GPLv3
@@ -434,8 +434,16 @@ components:
           type: string
           title: Descrição
         nivel:
-          allOf:
-          - $ref: '#/components/schemas/NivelEnum'
+          enum:
+          - B
+          - I
+          - A
+          type: string
+          description: |-
+            * `B` - Básico
+            * `I` - Intermediário
+            * `A` - Avançado
+          x-spec-enum-id: df8d8368518925bb
           title: Nível
       required:
       - codigo
@@ -470,8 +478,16 @@ components:
           type: integer
           readOnly: true
         periodo:
-          allOf:
-          - $ref: '#/components/schemas/PeriodoEnum'
+          enum:
+          - M
+          - V
+          - N
+          type: string
+          description: |-
+            * `M` - MATUTINO
+            * `V` - VESPERTINO
+            * `N` - NOTURNO
+          x-spec-enum-id: d4aa80432577aa35
           title: Período
         estudante:
           type: integer
@@ -502,16 +518,6 @@ components:
       required:
       - curso
       - periodo
-    NivelEnum:
-      enum:
-      - B
-      - I
-      - A
-      type: string
-      description: |-
-        * `B` - Básico
-        * `I` - Intermediário
-        * `A` - Avançado
     PaginatedCursoList:
       type: object
       required:
@@ -573,8 +579,16 @@ components:
           type: string
           title: Descrição
         nivel:
-          allOf:
-          - $ref: '#/components/schemas/NivelEnum'
+          enum:
+          - B
+          - I
+          - A
+          type: string
+          description: |-
+            * `B` - Básico
+            * `I` - Intermediário
+            * `A` - Avançado
+          x-spec-enum-id: df8d8368518925bb
           title: Nível
     PatchedEstudanteSerializerV2:
       type: object
@@ -593,16 +607,6 @@ components:
           type: string
           title: Número de celular
           maxLength: 14
-    PeriodoEnum:
-      enum:
-      - M
-      - V
-      - N
-      type: string
-      description: |-
-        * `M` - MATUTINO
-        * `V` - VESPERTINO
-        * `N` - NOTURNO
   securitySchemes:
     basicAuth:
       type: http
