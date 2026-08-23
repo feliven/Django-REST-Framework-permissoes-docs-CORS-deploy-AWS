@@ -46,7 +46,7 @@ class MatriculasPorEstudanteSerializer(serializers.ModelSerializer):
         model = Matricula
         fields = ["curso", "periodo"]
 
-    def get_periodo(self, obj):
+    def get_periodo(self, obj) -> str:
         return obj.get_periodo_display()
 
 

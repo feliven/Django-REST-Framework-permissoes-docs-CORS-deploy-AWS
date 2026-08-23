@@ -17,6 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 from rest_framework import routers
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from escola.views import (
@@ -34,13 +35,20 @@ router.register(r"matriculas", MatriculaViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include(router.urls)),
-    path("estudantes/<int:pk>/matriculas", MatriculasPorEstudante.as_view()),
-    path("cursos/<int:pk>/matriculas", MatriculasPorCurso.as_view()),
+    path("", RedirectView.as_view(url="/v1/", permanent=False)),
     path("schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "swagger/",
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger-ui",
+    ),
+    path("<str:version>/", include(router.urls)),
+    path(
+        "<str:version>/estudantes/<int:pk>/matriculas",
+        MatriculasPorEstudante.as_view(),
+    ),
+    path(
+        "<str:version>/cursos/<int:pk>/matriculas",
+        MatriculasPorCurso.as_view(),
     ),
 ]

@@ -7,9 +7,9 @@ info:
     name: GPLv3
     url: https://www.gnu.org/licenses/gpl-3.0.html.en
 paths:
-  /cursos/:
+  /v1/cursos/:
     get:
-      operationId: cursos_list
+      operationId: v1_cursos_list
       parameters:
       - name: page
         required: false
@@ -18,7 +18,7 @@ paths:
         schema:
           type: integer
       tags:
-      - cursos
+      - v1
       security:
       - basicAuth: []
       responses:
@@ -29,9 +29,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedCursoList'
           description: ''
     post:
-      operationId: cursos_create
+      operationId: v1_cursos_create
       tags:
-      - cursos
+      - v1
       requestBody:
         content:
           application/json:
@@ -53,9 +53,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Curso'
           description: ''
-  /cursos/{id}/:
+  /v1/cursos/{id}/:
     get:
-      operationId: cursos_retrieve
+      operationId: v1_cursos_retrieve
       parameters:
       - in: path
         name: id
@@ -64,7 +64,7 @@ paths:
         description: Um valor inteiro único que identifica este curso.
         required: true
       tags:
-      - cursos
+      - v1
       security:
       - basicAuth: []
       responses:
@@ -75,7 +75,7 @@ paths:
                 $ref: '#/components/schemas/Curso'
           description: ''
     put:
-      operationId: cursos_update
+      operationId: v1_cursos_update
       parameters:
       - in: path
         name: id
@@ -84,7 +84,7 @@ paths:
         description: Um valor inteiro único que identifica este curso.
         required: true
       tags:
-      - cursos
+      - v1
       requestBody:
         content:
           application/json:
@@ -107,7 +107,7 @@ paths:
                 $ref: '#/components/schemas/Curso'
           description: ''
     patch:
-      operationId: cursos_partial_update
+      operationId: v1_cursos_partial_update
       parameters:
       - in: path
         name: id
@@ -116,7 +116,7 @@ paths:
         description: Um valor inteiro único que identifica este curso.
         required: true
       tags:
-      - cursos
+      - v1
       requestBody:
         content:
           application/json:
@@ -138,7 +138,7 @@ paths:
                 $ref: '#/components/schemas/Curso'
           description: ''
     delete:
-      operationId: cursos_destroy
+      operationId: v1_cursos_destroy
       parameters:
       - in: path
         name: id
@@ -147,15 +147,15 @@ paths:
         description: Um valor inteiro único que identifica este curso.
         required: true
       tags:
-      - cursos
+      - v1
       security:
       - basicAuth: []
       responses:
         '204':
           description: No response body
-  /cursos/{id}/matriculas:
+  /v1/cursos/{id}/matriculas:
     get:
-      operationId: cursos_matriculas_list
+      operationId: v1_cursos_matriculas_list
       parameters:
       - in: path
         name: id
@@ -163,7 +163,7 @@ paths:
           type: integer
         required: true
       tags:
-      - cursos
+      - v1
       security:
       - basicAuth: []
       responses:
@@ -175,9 +175,9 @@ paths:
                 items:
                   $ref: '#/components/schemas/MatriculasPorCurso'
           description: ''
-  /estudantes/:
+  /v1/estudantes/:
     get:
-      operationId: estudantes_list
+      operationId: v1_estudantes_list
       parameters:
       - name: ordering
         required: false
@@ -198,7 +198,7 @@ paths:
         schema:
           type: string
       tags:
-      - estudantes
+      - v1
       security:
       - basicAuth: []
       responses:
@@ -209,9 +209,9 @@ paths:
                 $ref: '#/components/schemas/PaginatedEstudanteList'
           description: ''
     post:
-      operationId: estudantes_create
+      operationId: v1_estudantes_create
       tags:
-      - estudantes
+      - v1
       requestBody:
         content:
           application/json:
@@ -233,9 +233,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Estudante'
           description: ''
-  /estudantes/{id}/:
+  /v1/estudantes/{id}/:
     get:
-      operationId: estudantes_retrieve
+      operationId: v1_estudantes_retrieve
       parameters:
       - in: path
         name: id
@@ -244,7 +244,7 @@ paths:
         description: Um valor inteiro único que identifica este estudante.
         required: true
       tags:
-      - estudantes
+      - v1
       security:
       - basicAuth: []
       responses:
@@ -255,7 +255,7 @@ paths:
                 $ref: '#/components/schemas/Estudante'
           description: ''
     put:
-      operationId: estudantes_update
+      operationId: v1_estudantes_update
       parameters:
       - in: path
         name: id
@@ -264,7 +264,7 @@ paths:
         description: Um valor inteiro único que identifica este estudante.
         required: true
       tags:
-      - estudantes
+      - v1
       requestBody:
         content:
           application/json:
@@ -287,7 +287,7 @@ paths:
                 $ref: '#/components/schemas/Estudante'
           description: ''
     patch:
-      operationId: estudantes_partial_update
+      operationId: v1_estudantes_partial_update
       parameters:
       - in: path
         name: id
@@ -296,7 +296,7 @@ paths:
         description: Um valor inteiro único que identifica este estudante.
         required: true
       tags:
-      - estudantes
+      - v1
       requestBody:
         content:
           application/json:
@@ -318,7 +318,7 @@ paths:
                 $ref: '#/components/schemas/Estudante'
           description: ''
     delete:
-      operationId: estudantes_destroy
+      operationId: v1_estudantes_destroy
       parameters:
       - in: path
         name: id
@@ -327,15 +327,15 @@ paths:
         description: Um valor inteiro único que identifica este estudante.
         required: true
       tags:
-      - estudantes
+      - v1
       security:
       - basicAuth: []
       responses:
         '204':
           description: No response body
-  /estudantes/{id}/matriculas:
+  /v1/estudantes/{id}/matriculas:
     get:
-      operationId: estudantes_matriculas_list
+      operationId: v1_estudantes_matriculas_list
       parameters:
       - in: path
         name: id
@@ -343,7 +343,7 @@ paths:
           type: integer
         required: true
       tags:
-      - estudantes
+      - v1
       security:
       - basicAuth: []
       responses:
@@ -355,11 +355,11 @@ paths:
                 items:
                   $ref: '#/components/schemas/MatriculasPorEstudante'
           description: ''
-  /matriculas/:
+  /v1/matriculas/:
     get:
-      operationId: matriculas_list
+      operationId: v1_matriculas_list
       tags:
-      - matriculas
+      - v1
       security:
       - basicAuth: []
       responses:
@@ -372,9 +372,9 @@ paths:
                   $ref: '#/components/schemas/Matricula'
           description: ''
     post:
-      operationId: matriculas_create
+      operationId: v1_matriculas_create
       tags:
-      - matriculas
+      - v1
       requestBody:
         content:
           application/json:
@@ -396,9 +396,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Matricula'
           description: ''
-  /matriculas/{id}/:
+  /v1/matriculas/{id}/:
     get:
-      operationId: matriculas_retrieve
+      operationId: v1_matriculas_retrieve
       parameters:
       - in: path
         name: id
@@ -407,7 +407,7 @@ paths:
         description: Um valor inteiro único que identifica este matricula.
         required: true
       tags:
-      - matriculas
+      - v1
       security:
       - basicAuth: []
       responses:
