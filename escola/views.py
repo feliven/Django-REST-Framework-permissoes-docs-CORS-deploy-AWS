@@ -65,18 +65,20 @@ class MatriculaViewSet(viewsets.ModelViewSet):
 
 
 class MatriculasPorEstudante(generics.ListAPIView):
+    queryset = Matricula.objects.all()
+    serializer_class = MatriculasPorEstudanteSerializer
+
     def get_queryset(self):  # type: ignore[override]
         queryset = Matricula.objects.filter(estudante_id=self.kwargs["pk"]).order_by(
             "id"
         )
         return queryset
 
-    serializer_class = MatriculasPorEstudanteSerializer
-
 
 class MatriculasPorCurso(generics.ListAPIView):
+    queryset = Matricula.objects.all()
+    serializer_class = MatriculasPorCursoSerializer
+
     def get_queryset(self):  # type: ignore[override]
         queryset = Matricula.objects.filter(curso_id=self.kwargs["pk"]).order_by("id")
         return queryset
-
-    serializer_class = MatriculasPorCursoSerializer
