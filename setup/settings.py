@@ -118,6 +118,18 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
+SPECTACULAR_SETTINGS = {
+    "TITLE": "API Escola",
+    "DESCRIPTION": "Documentação da API para armazenar dados de estudantes, "
+    "cursos e matrículas",
+    "VERSION": "2.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "LICENSE": {
+        "name": "GPLv3",
+        "url": "https://www.gnu.org/licenses/gpl-3.0.html.en",
+    },
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
