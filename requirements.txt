@@ -9,6 +9,7 @@ inflection
 jsonschema
 jsonschema-specifications
 Markdown
+python-dotenv
 PyYAML
 referencing
 rpds-py
