@@ -1,10 +1,13 @@
 asgiref
 attrs
+click
 Django
 django-cors-headers
 django-filter
 djangorestframework
 drf-spectacular
+gunicorn
+h11
 inflection
 jsonschema
 jsonschema-specifications
@@ -15,4 +18,7 @@ referencing
 rpds-py
 sqlparse
 uritemplate
+uvicorn
+uvicorn-worker
 validate-docbr
+whitenoise
